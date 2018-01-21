@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_21_051315) do
+ActiveRecord::Schema.define(version: 2018_01_21_055643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2018_01_21_051315) do
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "lookcomments", force: :cascade do |t|
+    t.bigint "look_id"
+    t.bigint "comment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_lookcomments_on_comment_id"
+    t.index ["look_id"], name: "index_lookcomments_on_look_id"
   end
 
   create_table "looks", force: :cascade do |t|
@@ -107,6 +116,8 @@ ActiveRecord::Schema.define(version: 2018_01_21_051315) do
 
   add_foreign_key "clientstatuses", "clients"
   add_foreign_key "clientstatuses", "users"
+  add_foreign_key "lookcomments", "comments"
+  add_foreign_key "lookcomments", "looks"
   add_foreign_key "stylistlooks", "looks"
   add_foreign_key "stylistlooks", "stylists"
   add_foreign_key "stylistposts", "posts"

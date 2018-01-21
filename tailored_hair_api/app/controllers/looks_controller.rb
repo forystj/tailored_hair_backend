@@ -5,12 +5,24 @@ class LooksController < ApplicationController
   def index
     @looks = Look.all
 
-    render json: @looks.to_json(include: :stylists)
+    render json:
+    @looks.to_json(include: :stylists)
+  end
+
+  def index
+    @looks = Look.all
+
+    render json:
+    @looks.to_json(include: :comments)
   end
 
   # GET /looks/1
   def show
     render json: @look.to_json(include: :stylists)
+  end
+
+  def show
+    render json: @look.to_json(include: :comments)
   end
 
   # POST /looks

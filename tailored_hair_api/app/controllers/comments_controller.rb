@@ -8,9 +8,19 @@ class CommentsController < ApplicationController
     render json: @comments.to_json(include: :users)
   end
 
+  def index
+    @comments = Comment.all
+
+    render json: @comments.to_json(include: :looks)
+  end
+
   # GET /comments/1
   def show
     render json: @comment.to_json(include: :users)
+  end
+
+  def show
+    render json: @comment.to_json(include: :looks)
   end
 
   # POST /comments
